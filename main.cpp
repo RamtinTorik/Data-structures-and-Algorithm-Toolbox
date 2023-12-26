@@ -70,14 +70,6 @@ int main()
                 k++;
                 break;
             }
-            case '6':
-            {
-                // system("cls");
-                cout << "case 6\n";
-                deleteallcontacts();
-                k++;
-                break;
-            }
 
             case '0':
             {
