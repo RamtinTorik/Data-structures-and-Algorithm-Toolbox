@@ -23,9 +23,10 @@ def return_menu():
     while(True):
         myinput = input("\nPlease press enter to return menu...")
         if myinput == '':
-            menu()
+            main()
             break
         else:
+            os.system("cls")
             print("Please enter correct key :)\n")
             
 def enter_array():
@@ -54,37 +55,36 @@ def binary_search():
     return 'x'
         
 
-def menu():
+def main():
     while True:
         match print_menu():
             case '1':
-                os.system("cls")
                 os.system("cls")
                 result = binary_search()
                 if result != 'x':
                     print("\nThe desired number is index" ,result)
                 else:
-                    print("doesn't exist...")
+                    print("\ndoesn't exist... :(")
                 return_menu()
 
             case '2':
                 os.system("cls")
-                print("You can become a Data Scientist")
+                print("case2")
                 return_menu()
                 
             case '3':
                 os.system("cls")
-                print("You can become a backend developer")
+                print("case3")
                 return_menu()
             
             case '4':
                 os.system("cls")
-                print("You can become a Blockchain developer")
+                print("case 4")
                 return_menu()
 
             case '5':
                 os.system("cls")
-                print("You can become a mobile app developer")
+                print("case 5")
                 return_menu()
                 
             case '0':
@@ -97,7 +97,7 @@ def menu():
                 "Please enter correct number :)")
                 return_menu()
                 
-menu()
+main()
 # print(binary_search())
 
 # def make_tree():
