@@ -53,8 +53,27 @@ def binary_search():
         else:
             high = middle - 1
     return 'x'
-        
 
+def insertion_sort():
+    arr = enter_array()
+        
+def selection_sort():
+    arr = enter_array()
+
+def sort_array():
+    while True:
+        print(
+        "1. insertion sort\n"
+        "2. selection sort\n")
+        myinput = input("Which type of sorting do you choose? ")
+        if myinput == '1':
+            insertion_sort()
+        elif myinput == '2':
+            arr = enter_array()
+        else:
+            print("Please enter correct number :)")
+        
+    
 def main():
     while True:
         match print_menu():
@@ -69,7 +88,9 @@ def main():
 
             case '2':
                 os.system("cls")
+                
                 print("case2")
+                sort_array()
                 return_menu()
                 
             case '3':
@@ -100,11 +121,7 @@ def main():
 main()
 # print(binary_search())
 
-# def make_tree():
-#     arr = list()
-#     add
-#     while True:
-#         myinput = int(input())
+
 
 
 
