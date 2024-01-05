@@ -1,6 +1,7 @@
 import os
 import time
 import regex
+import math
 
 def print_menu():
     os.system("cls")
@@ -32,9 +33,19 @@ def return_menu():
             print("Please enter correct key :)\n")
             
             
-def enter_array():
-    arr = [int(i) for i in list(input("Please enter your array: ").split(','))]
-    return arr
+def enter_array(begin):
+    if begin == True:
+        arr = [int(i) for i in list(input("Please enter your array: ").split(','))]
+        return arr
+    else:
+        # list1 = [0]
+        arr = [int(i) for i in list(input("Please enter your array: ").split(','))]
+        x = [0]
+        x.extend(arr)
+        # print(arr)
+        return x
+    
+
     
 def enter_number():
     number = int(input("Please enter your number: "))
@@ -42,7 +53,7 @@ def enter_number():
     
 def binary_search():
     number = enter_number()
-    arr = enter_array()
+    arr = enter_array(True)
     arr.sort()
     print("sorted array: ", arr)
     low = 0
@@ -58,7 +69,7 @@ def binary_search():
     return 'x'
 
 def insertion_sort():
-    arr = enter_array()
+    arr = enter_array(True)
     n=len(arr)
     print("\n", end ='')
     for i in range(1, n):
@@ -73,7 +84,7 @@ def insertion_sort():
     
     
 def selection_sort():
-    arr = enter_array()
+    arr = enter_array(True)
     n=len(arr)
     print("\n", end ='')
     for i in range(n-1, 0, -1):
@@ -105,7 +116,6 @@ def sort_array():
             print("Please enter correct number :)")
         
 def infix_converter():
-    
     while True:
         mystring = input("Please enter your infix string: ")
         result = regex.match(r"^(([+-]*\d+|\((?1)\))([+^*/-](?2))*)$", mystring)
@@ -188,8 +198,73 @@ def infix_converter():
     
     print("prefix:", infix_to_prefix(mystring))
     print("postfix:",infix_to_postfix(mystring))
-    # print(infix_to_postfix(mystring))
     
+def heapify():
+    
+    def max_heapify(mylist, i, length):
+        l = 2*i
+        r = 2*i + 1
+        if (l <= length) and (mylist[l] > mylist[i]):
+            largest = l
+        else:
+            largest = i
+        if (r <= length) and (mylist[r] > mylist[largest]):
+            largest = r
+        if largest != i:
+            temp = mylist[i]
+            mylist[i] = mylist[largest]
+            mylist[largest] = temp
+            max_heapify(mylist, largest, length)
+
+    def build_max_heap(mylist):
+        length = len(mylist)-1
+        for i in range(length//2, 0, -1):
+            max_heapify(mylist, i, length)
+        return mylist
+
+    mylist = enter_array(False)
+    result = build_max_heap(mylist)
+    
+    print("Max Heap: ", result[1:])
+    # length = len(mylist)-1
+    # high = math.log(length, 2)
+    # for i in range(1, length+1):
+    
+def adjmatrix_to_graph_BFS():
+    def enter_vertex():
+        arr = list(input("Please enter your vertices: ").split(','))
+        return arr
+    
+    def adjmatrix_to_graph():
+        vertices = enter_vertex()
+        length = len(vertices)
+        matrix = list()
+        for i in range(0, length):
+            temp_matrix = list()
+            for j in range(0, length):
+                temp_matrix.append(0)
+            matrix.append(temp_matrix)
+        # print(matrix)
+        
+        counter = 1
+        print("\n   ", end=' ')   
+        for i in vertices:
+            print(f"({counter}){i}", end=' ')
+            counter += 1
+        print('\n', end='')
+        counter = 1
+        for j in matrix:
+            print(f"({counter}){vertices[counter-1]} ", end=' ')
+            for k in j:
+                print(f"{k}   ", end=' ')
+            print('\n', end='')
+            counter += 1
+        
+        coordinates = [int(i) for i in list(input("Please enter your array: ").split(','))]
+        
+        
+        
+    adjmatrix_to_graph()
     
 def main():
     while True:
@@ -215,12 +290,12 @@ def main():
             
             case '4':
                 os.system("cls")
-                print("case 4")
+                heapify()
                 return_menu()
 
             case '5':
                 os.system("cls")
-                print("case 5")
+                adjmatrix_to_graph_BFS()
                 return_menu()
                 
             case '0':
@@ -235,7 +310,7 @@ def main():
 main()
 
 # selection_sort()
-# arr = enter_array()
+# arr = enter_array(True)
 
 # binary_search(arr)
 # bubblesort(arr)
