@@ -235,7 +235,7 @@ def adjmatrix_to_graph_BFS():
         arr = list(input("Please enter your vertices: ").split(','))
         return arr
     
-    def adjmatrix_to_graph():
+    def adjmatrix():
         vertices = enter_vertex()
         length = len(vertices)
         matrix = list()
@@ -245,26 +245,44 @@ def adjmatrix_to_graph_BFS():
                 temp_matrix.append(0)
             matrix.append(temp_matrix)
         # print(matrix)
-        
-        counter = 1
-        print("\n   ", end=' ')   
-        for i in vertices:
-            print(f"({counter}){i}", end=' ')
-            counter += 1
-        print('\n', end='')
-        counter = 1
-        for j in matrix:
-            print(f"({counter}){vertices[counter-1]} ", end=' ')
-            for k in j:
-                print(f"{k}   ", end=' ')
+        return vertices, matrix
+    
+    def print_change_adjmatrix(vertices, matrix):
+        while True:
+            counter = 1
+            print("\n   ", end=' ')   
+            for i in vertices:
+                print(f"({counter}){i}", end=' ')
+                counter += 1
             print('\n', end='')
-            counter += 1
+            counter = 1
+            for j in matrix:
+                print(f"({counter}){vertices[counter-1]} ", end=' ')
+                for k in j:
+                    print(f"{k}   ", end=' ')
+                print('\n', end='')
+                counter += 1
+            
+            print("enter 'e' to finish")
+            x = input("Please enter x: ")
+            if x == 'e':
+                break
+            else:
+                x = int(x)
+                y = int(input("Please enter y: "))
+                
+            matrix[x-1][y-1] = 1
+            matrix[y-1][x-1] = 1
+        return matrix
+    
+    def generate_graph():
         
-        coordinates = [int(i) for i in list(input("Please enter your array: ").split(','))]
-        
-        
-        
-    adjmatrix_to_graph()
+            
+    vertices, matrix = adjmatrix()
+    matrix = print_change_adjmatrix(vertices, matrix)
+    # print(matrix)
+    
+    
     
 def main():
     while True:
