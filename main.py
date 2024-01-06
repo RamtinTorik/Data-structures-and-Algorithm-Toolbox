@@ -275,7 +275,7 @@ def adjmatrix_to_graph_BFS():
             matrix[y-1][x-1] = 1
         return matrix
     
-    def generate_graph(vertices, matrix):
+    def build_graph(vertices, matrix):
         mydict = dict()
         counter1 = 0
         for i in matrix:
@@ -296,7 +296,7 @@ def adjmatrix_to_graph_BFS():
             
     vertices, matrix = adjmatrix()
     matrix = print_change_adjmatrix(vertices, matrix)
-    generate_graph(vertices, matrix)
+    build_graph(vertices, matrix)
     # print(matrix)
     
     
