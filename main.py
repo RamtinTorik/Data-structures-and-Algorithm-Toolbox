@@ -1,6 +1,6 @@
 import os
 import time
-import regex
+# import regex
 import math
 
 def print_menu():
@@ -275,11 +275,28 @@ def adjmatrix_to_graph_BFS():
             matrix[y-1][x-1] = 1
         return matrix
     
-    def generate_graph():
+    def generate_graph(vertices, matrix):
+        mydict = dict()
+        counter1 = 0
+        for i in matrix:
+            counter2 = 0
+            mylist = list()
+            for j in i:
+                if j == 1:
+                    mylist.append(vertices[counter2])
+                    mydict[vertices[counter1]] = mylist
+                counter2 += 1
+            counter1 += 1
+            
+        return mydict
+    
+    def graph_to_BFS():
         
+            
             
     vertices, matrix = adjmatrix()
     matrix = print_change_adjmatrix(vertices, matrix)
+    generate_graph(vertices, matrix)
     # print(matrix)
     
     
