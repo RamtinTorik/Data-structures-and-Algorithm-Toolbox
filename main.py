@@ -1,6 +1,6 @@
 import os
 import time
-# import regex
+import regex
 import math
 
 def print_menu():
@@ -273,6 +273,8 @@ def adjmatrix_to_graph_BFS():
                 
             matrix[x-1][y-1] = 1
             matrix[y-1][x-1] = 1
+            os.system("cls")
+            print(vertices)
         return matrix
     
     def build_graph(vertices, matrix):
@@ -290,13 +292,41 @@ def adjmatrix_to_graph_BFS():
             
         return mydict
     
-    def graph_to_BFS():
+    def graph_to_BFS(vertices, graph):
+        my_marked_vertices = dict()
+        queue = list()
+        keys = graph.keys()
+        result = list()
+        for key in keys:
+            my_marked_vertices[key] = 0
+        # print(my_marked_vertices)
+        # print(keys)
+        queue.append(vertices[0])
+        my_marked_vertices[vertices[0]] = 1 
+        result.append(vertices[0])
         
-            
+        while queue != []:
+            i = queue.pop(0)
+            for adjacent in graph[i]:
+                if my_marked_vertices[adjacent] == 0:
+                    # print(adjacent)
+                    queue.append(adjacent)
+                    my_marked_vertices[adjacent] = 1
+                    result.append(adjacent)
+        #     i = Del(Q);
+        #     for each j adjacent to i do
+        #         if j is not marked
+        #             Add(Q,i)
+        #             mark j
+        #             cout << j
+        print("BFS: ", ''.join(result))
+        # for i in result:
+        #     print(i, end='')
             
     vertices, matrix = adjmatrix()
     matrix = print_change_adjmatrix(vertices, matrix)
-    build_graph(vertices, matrix)
+    graph = build_graph(vertices, matrix)
+    graph_to_BFS(vertices, graph)
     # print(matrix)
     
     
