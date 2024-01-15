@@ -38,11 +38,9 @@ def enter_array(begin):
         arr = [int(i) for i in list(input("Please enter your array: ").split(','))]
         return arr
     else:
-        # list1 = [0]
         arr = [int(i) for i in list(input("Please enter your array: ").split(','))]
         x = [0]
         x.extend(arr)
-        # print(arr)
         return x
     
 
@@ -226,9 +224,6 @@ def heapify():
     result = build_max_heap(mylist)
     
     print("Max Heap: ", result[1:])
-    # length = len(mylist)-1
-    # high = math.log(length, 2)
-    # for i in range(1, length+1):
     
 def adjmatrix_to_graph_BFS():
     def enter_vertex():
@@ -244,7 +239,6 @@ def adjmatrix_to_graph_BFS():
             for j in range(0, length):
                 temp_matrix.append(0)
             matrix.append(temp_matrix)
-        # print(matrix)
         return vertices, matrix
     
     def print_change_adjmatrix(vertices, matrix):
@@ -299,8 +293,6 @@ def adjmatrix_to_graph_BFS():
         result = list()
         for key in keys:
             my_marked_vertices[key] = 0
-        # print(my_marked_vertices)
-        # print(keys)
         queue.append(vertices[0])
         my_marked_vertices[vertices[0]] = 1 
         result.append(vertices[0])
@@ -309,27 +301,16 @@ def adjmatrix_to_graph_BFS():
             i = queue.pop(0)
             for adjacent in graph[i]:
                 if my_marked_vertices[adjacent] == 0:
-                    # print(adjacent)
                     queue.append(adjacent)
                     my_marked_vertices[adjacent] = 1
                     result.append(adjacent)
-        #     i = Del(Q);
-        #     for each j adjacent to i do
-        #         if j is not marked
-        #             Add(Q,i)
-        #             mark j
-        #             cout << j
+
         print("BFS: ", ''.join(result))
-        # for i in result:
-        #     print(i, end='')
             
     vertices, matrix = adjmatrix()
     matrix = print_change_adjmatrix(vertices, matrix)
     graph = build_graph(vertices, matrix)
     graph_to_BFS(vertices, graph)
-    # print(matrix)
-    
-    
     
 def main():
     while True:
@@ -374,13 +355,6 @@ def main():
                 
 main()
 
-# selection_sort()
-# arr = enter_array(True)
-
-# binary_search(arr)
-# bubblesort(arr)
-# }
-# print(binary_search())
 
 
 
