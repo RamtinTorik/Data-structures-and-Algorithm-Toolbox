@@ -20,8 +20,6 @@ def print_menu():
 	"0. Exit\n")
     
     myinput = input("Please Enter Your Choice: ")
-
-
     return myinput
 
 def return_menu():
@@ -33,7 +31,6 @@ def return_menu():
         else:
             os.system("cls")
             print("Please enter correct key :)\n")
-            
             
 def enter_array(begin):
     if begin == True:
@@ -53,7 +50,7 @@ def enter_array(begin):
         except:
             os.system("cls")
             print("Please enter correct array :)\n")
-            enter_array(False)
+            return enter_array(False)
     
 def enter_number():
     try:
@@ -62,8 +59,7 @@ def enter_number():
     except:
         os.system("cls")
         print("Please enter correct value :)\n")
-        enter_number()
-    
+        return enter_number()
     
 def binary_search():
     number = enter_number()
@@ -96,13 +92,11 @@ def insertion_sort():
         print(f"step {i}: ", arr)
     print("\nsorted array: ", arr)
     
-    
 def selection_sort():
     arr = enter_array(True)
     n=len(arr)
     print("\n", end ='')
     for i in range(n-1, 0, -1):
-        # print(i)
         max = arr[0]
         index = 0
         for j in range(1, i+1):
@@ -157,54 +151,45 @@ def infix_converter():
     
     def infix_to_postfix(infix):
         result = []
-        stack = []
+        mystack = []
 
         for i in range(len(infix)):
             c = infix[i]
-
-            # If the scanned character is an operand, add it to the output string.
             if ('a' <= c <= 'z') or ('A' <= c <= 'Z') or ('0' <= c <= '9'):
                 result.append(c)
-            # If the scanned character is an ‘(‘, push it to the stack.
             elif c == '(':
-                stack.append(c)
-            # If the scanned character is an ‘)’, pop and add to the output string from the stack
-            # until an ‘(‘ is encountered.
+                mystack.append(c)
             elif c == ')':
-                while stack and stack[-1] != '(':
-                    result.append(stack.pop())
-                stack.pop() # Pop '('
-            # If an operator is scanned
+                while mystack and mystack[-1] != '(':
+                    result.append(mystack.pop())
+                mystack.pop()
             else:
-                while stack and (prec(infix[i]) < prec(stack[-1]) or
-                                (prec(infix[i]) == prec(stack[-1]) and associativity(infix[i]) == 'L')):
-                    result.append(stack.pop())
-                stack.append(c)
-
-        # Pop all the remaining elements from the stack
-        while stack:
-            result.append(stack.pop())
+                while mystack and (prec(infix[i]) < prec(mystack[-1]) or
+                                (prec(infix[i]) == prec(mystack[-1]) and associativity(infix[i]) == 'L')):
+                    result.append(mystack.pop())
+                mystack.append(c)
+            
+        while mystack:
+            result.append(mystack.pop())
 
         postfix = ''.join(result)
         return postfix
     
     def infix_to_prefix(infix):
         l = len(infix)
-    
         infix = infix[::-1]
-    
-        l_infix = []
+        copy_infix = []
         
         for i in range(l):
-            l_infix.append(infix[i]) 
+            copy_infix.append(infix[i]) 
                 
-        for i in range(l):
-            if l_infix[i] == '(':
-                l_infix[i] = ')'
-            elif l_infix[i] == ')':
-                l_infix[i] = '('
+        for i in range(0, l):
+            if copy_infix[i] == '(':
+                copy_infix[i] = ')'
+            elif copy_infix[i] == ')':
+                copy_infix[i] = '('
 
-        infix = ''.join(l_infix)
+        infix = ''.join(copy_infix)
         
         prefix = infix_to_postfix(infix)
         prefix = prefix[::-1]
@@ -320,7 +305,6 @@ def adjmatrix_to_graph_BFS():
                     mydict[vertices[counter1]] = mylist
                 counter2 += 1
             counter1 += 1
-            
         return mydict
     
     def graph_to_BFS(vertices, graph):
@@ -391,31 +375,3 @@ def main():
                 return_menu()
                 
 main()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
