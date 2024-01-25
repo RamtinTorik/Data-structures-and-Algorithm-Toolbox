@@ -18,8 +18,10 @@ def print_menu():
 	"4. Heapify\n"
 	"5. Adj Matrix to Graph And BFS\n"
 	"0. Exit\n")
-
+    
     myinput = input("Please Enter Your Choice: ")
+
+
     return myinput
 
 def return_menu():
@@ -35,19 +37,33 @@ def return_menu():
             
 def enter_array(begin):
     if begin == True:
-        arr = [int(i) for i in list(input("Please enter your array: ").split(','))]
-        return arr
+        try:
+            arr = [int(i) for i in list(input("Please enter your array: ").split(','))]
+            return arr
+        except:
+            os.system("cls")
+            print("Please enter correct array :)\n")
+            return enter_array(True)
     else:
-        arr = [int(i) for i in list(input("Please enter your array: ").split(','))]
-        x = [0]
-        x.extend(arr)
-        return x
-    
-
+        try:
+            arr = [int(i) for i in list(input("Please enter your array: ").split(','))]
+            x = [0]
+            x.extend(arr)
+            return x
+        except:
+            os.system("cls")
+            print("Please enter correct array :)\n")
+            enter_array(False)
     
 def enter_number():
-    number = int(input("Please enter your number: "))
-    return number
+    try:
+        number = int(input("Please enter your number: "))
+        return number
+    except:
+        os.system("cls")
+        print("Please enter correct value :)\n")
+        enter_number()
+    
     
 def binary_search():
     number = enter_number()
@@ -59,7 +75,7 @@ def binary_search():
     while low <= high:
         middle = (low+high)//2
         if arr[middle] == number:
-            return middle+1
+            return middle
         elif arr[middle] < number:
             low = middle + 1
         else:
@@ -111,6 +127,7 @@ def sort_array():
             selection_sort()
             break
         else:
+            os.system("cls")
             print("Please enter correct number :)")
         
 def infix_converter():
@@ -241,6 +258,29 @@ def adjmatrix_to_graph_BFS():
             matrix.append(temp_matrix)
         return vertices, matrix
     
+    def enter_x_y(vertices, len_vertices):
+        print(f"input in range(1,{len_vertices}) and enter 'e' to finish")
+        x = input("Please enter x: ")
+        if x == 'e':
+            return -1,-1
+        else:
+            try:
+                y = input("Please enter y: ")
+                x = int(x)
+                y = int(y)
+                if ((x > 0) and (x <= len_vertices)) and ((y > 0) and (y <= len_vertices)):
+                    return x,y
+                else:
+                    os.system("cls")
+                    print("Please enter correct input :)")
+                    print(vertices)
+                    return enter_x_y(vertices, len_vertices)
+            except:
+                os.system("cls")
+                print("Please enter correct input :)")
+                print(vertices)
+                return enter_x_y(vertices, len_vertices)
+        
     def print_change_adjmatrix(vertices, matrix):
         while True:
             counter = 1
@@ -256,19 +296,16 @@ def adjmatrix_to_graph_BFS():
                     print(f"{k}   ", end=' ')
                 print('\n', end='')
                 counter += 1
+                
+            x,y = enter_x_y(vertices, len(vertices))
             
-            print("enter 'e' to finish")
-            x = input("Please enter x: ")
-            if x == 'e':
+            if x==-1 or y==-1:
                 break
             else:
-                x = int(x)
-                y = int(input("Please enter y: "))
-                
-            matrix[x-1][y-1] = 1
-            matrix[y-1][x-1] = 1
-            os.system("cls")
-            print(vertices)
+                matrix[x-1][y-1] = 1
+                matrix[y-1][x-1] = 1
+                os.system("cls")
+                print(vertices)
         return matrix
     
     def build_graph(vertices, matrix):
@@ -319,7 +356,7 @@ def main():
                 os.system("cls")
                 result = binary_search()
                 if result != 'x':
-                    print("\nThe desired number is index" ,result)
+                    print("\nThe desired number is index" ,result+1)
                 else:
                     print("\ndoesn't exist... :(")
                 return_menu()
